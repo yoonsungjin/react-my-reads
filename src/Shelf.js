@@ -5,7 +5,7 @@ import * as BooksAPI from './BooksAPI'
 class Shelf extends React.Component
 {
     state = {
-        booklist : {}
+        books : {}
 
     }
     componentDidMount() {
@@ -22,7 +22,8 @@ class Shelf extends React.Component
                     <Book />
                 </ol>
             </div>
-        </div>);
+        </div>
+        );
 
     }
 
