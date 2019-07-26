@@ -10,7 +10,9 @@ class Book extends React.Component
                 <div className="book-cover" style={{
 							width: 128,
 							height: 193,
-							backgroundImage: `url("$this.props.imageLinks.thumbnail")`
+							backgroundImage: `url("$this.props.imageLinks && this.props.imageLinks.thumbnail
+      ? this.props.imageLinks.thumbnail
+      : noCover;")`
 						}}></div>
                 <div className="book-shelf-changer">
                     <select>
