@@ -1,58 +1,33 @@
-import React from 'react';
-import Book from './Book.js';
-import BookCategory from './BookCategory'
+import React from "react";
+import Book from "./Book.js";
 
+class Shelf extends React.Component {
+  render() {
+    const bookonshelf = this.props.books.filter(books => {
+      books.shelf === this.props.title;
+    });
 
-class Shelf extends React.Component
-{
-    render(){
-        const booklist = [];
-/*        this.props.books.forEach(book => {
+    const books = bookonshelf.map(booklist => {
+      <Book book={booklist} />;
+    });
 
-              rows.push(
-                <Book
-                  thumbnail={book.imageLinks.thumbnail}
-                  title={book.title}
-                  author={book.author}
-                  key={book.title}
-                />
-              );
+    return (
+      <div>
+        <div className="bookshelf">
+          <h2 className="bookshelf-title">{this.props.title}</h2>
+          <div className="bookshelf-books">
+            <ol className="books-grid">{books}}</ol>
+          </div>
+        </div>
 
-
-        });
-*/  
-        this.props.books.map(book => {
-          book.shelf == this.props.title ? 
-            booklist.push(
-                <Book
-                  book={book}
-                  key={book.title}
-                />
-            ):null;
-        });
-
-        return(
-          <div>
-              <div className="bookshelf">  
-                <h2 className="bookshelf-title">{this.props.title}</h2>
-                <div className="bookshelf-books">
-                    <ol className="books-grid">
-                        {booklist}}
-                    </ol>
-                </div>
-              </div>
-                
-
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
-            </div>
-          </div>            
-
-
-        );
-
-    }
-
+        <div className="open-search">
+          <button onClick={() => this.setState({ showSearchPage: true })}>
+            Add a book
+          </button>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Shelf;
