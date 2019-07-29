@@ -3,6 +3,7 @@ import React from 'react';
 class Book extends React.Component
 {
     render(){
+        console.log(this.props.thumbnail);
         return(
             <li>
             <div className="book">
@@ -10,10 +11,7 @@ class Book extends React.Component
                 <div className="book-cover" style={{
 							width: 128,
 							height: 193,
-							backgroundImage: `url("$this.props.imageLinks && this.props.imageLinks.thumbnail
-      ? this.props.imageLinks.thumbnail
-      : noCover;")`
-						}}></div>
+							backgroundImage: `url("${this.props.thumbnail}")`}}></div>
                 <div className="book-shelf-changer">
                     <select>
                     <option value="move" disabled>Move to...</option>
