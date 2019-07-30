@@ -15,7 +15,12 @@ class Book extends React.Component {
               }}
             ></div>
             <div className="book-shelf-changer">
-              <select>
+              <select
+                value={this.props.book.shelf}
+                onChange={event =>
+                  this.props.updateShelf(this.props.book, event.target.value)
+                }
+              >
                 <option value="move" disabled>
                   Move to...
                 </option>

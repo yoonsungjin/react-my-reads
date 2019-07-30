@@ -14,16 +14,19 @@ class Main extends React.Component {
               books => books.shelf === "currentlyReading"
             )}
             title={"Currently Reading"}
+            updateShelf={this.props.updateShelf}
           />
           <Shelf
             books={this.props.books.filter(
               books => books.shelf === "wantToRead"
             )}
             title={"Want to Read"}
+            updateShelf={this.props.updateShelf}
           />
           <Shelf
             books={this.props.books.filter(books => books.shelf === "read")}
             title={"Read"}
+            updateShelf={this.props.updateShelf}
           />
         </div>
       </div>
