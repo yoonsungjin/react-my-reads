@@ -2,11 +2,8 @@ import React from "react";
 
 class Book extends React.Component {
   render() {
-    const book = this.props.book;
-    console.log(book);
-
     return (
-      <li key={this.props.book.id}>
+      <li key={this.props.key}>
         <div className="book">
           <div className="book-top">
             <div
@@ -14,7 +11,7 @@ class Book extends React.Component {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: `url("${book.imageLinks.thumbnail}")`
+                backgroundImage: `url("${this.props.book.imageLinks.thumbnail}")`
               }}
             ></div>
             <div className="book-shelf-changer">
@@ -29,8 +26,8 @@ class Book extends React.Component {
               </select>
             </div>
           </div>
-          <div className="book-title">{book.title}</div>
-          <div className="book-authors">{book.authors}</div>
+          <div className="book-title">{this.props.book.title}</div>
+          <div className="book-authors">{this.props.book.authors}</div>
         </div>
       </li>
     );

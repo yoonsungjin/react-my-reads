@@ -1,18 +1,16 @@
-import React from 'react'
-import * as BooksAPI from './BooksAPI'
-import './App.css'
-import Main from './Main'
+import React from "react";
+import * as BooksAPI from "./BooksAPI";
+import "./App.css";
+import Main from "./Main";
 
 class BooksApp extends React.Component {
   state = {
     books: [],
     showSearchPage: false
-  }
+  };
 
   componentDidMount() {
-    BooksAPI.getAll().then(books =>
-      this.setState({ books : books })
-    );
+    BooksAPI.getAll().then(books => this.setState({ books: books }));
   }
 
   render() {
@@ -21,11 +19,15 @@ class BooksApp extends React.Component {
         {this.state.showSearchPage ? (
           <div className="search-books">
             <div className="search-books-bar">
-              <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
+              <button
+                className="close-search"
+                onClick={() => this.setState({ showSearchPage: false })}
+              >
+                Close
+              </button>
               <div className="search-books-input-wrapper">
                 {}
-                <input type="text" placeholder="Search by title or author"/>
-
+                <input type="text" placeholder="Search by title or author" />
               </div>
             </div>
             <div className="search-books-results">
@@ -33,11 +35,11 @@ class BooksApp extends React.Component {
             </div>
           </div>
         ) : (
-          <Main books={this.state.books}/>
+          <Main books={this.state.books} />
         )}
       </div>
-    )
+    );
   }
 }
 
-export default BooksApp
+export default BooksApp;

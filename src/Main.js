@@ -9,9 +9,22 @@ class Main extends React.Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <Shelf books={this.props.books} title={"Currently Reading"} />
-          <Shelf books={this.props.books} title={"Want to Read"} />
-          <Shelf books={this.props.books} title={"Read"} />
+          <Shelf
+            books={this.props.books.filter(
+              books => books.shelf === "currentlyReading"
+            )}
+            title={"Currently Reading"}
+          />
+          <Shelf
+            books={this.props.books.filter(
+              books => books.shelf === "wantToRead"
+            )}
+            title={"Want to Read"}
+          />
+          <Shelf
+            books={this.props.books.filter(books => books.shelf === "read")}
+            title={"Read"}
+          />
         </div>
       </div>
     );
