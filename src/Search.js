@@ -4,10 +4,22 @@ import * as BooksAPI from "./BooksAPI";
 
 class Search extends React.Component {
   state = {
-    query: ""
+    query: "",
+    filteredBooks: []
   };
 
-  updateQuery = query => this.setState({ query: query });
+  updateQuery = query => {
+    this.setState({ query: query });
+    this.handleSearch(query);
+  };
+
+  handleSearch(query) {
+    BooksAPI.search(query.trim(), 20).then(books => {
+      books
+        ? this.setState({ filteredBooks: books })
+        : this.setState({ filteredBooks: [] });
+    });
+  }
 
   render() {
     return (
@@ -31,15 +43,13 @@ class Search extends React.Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.props.books
-              .filter(book => book.title == this.state.query)
-              .map(book => (
-                <Book
-                  book={book}
-                  key={book.id}
-                  updateShelf={this.props.updateShelf}
-                />
-              ))}
+            {this.state.filteredBooks.map(book => (
+              <Book
+                book={book}
+                key={book.id}
+                updateShelf={this.props.updateShelf}
+              />
+            ))}
           </ol>
         </div>
       </div>
