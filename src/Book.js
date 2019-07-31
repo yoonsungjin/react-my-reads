@@ -3,7 +3,7 @@ import React from "react";
 class Book extends React.Component {
   render() {
     return (
-      <li key={this.props.key}>
+      <li key={this.props.book.id}>
         <div className="book">
           <div className="book-top">
             <div
@@ -11,7 +11,12 @@ class Book extends React.Component {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: `url("${this.props.book.imageLinks.thumbnail}")`
+                backgroundImage: `url("${
+                  this.props.book.imageLinks &&
+                  this.props.book.imageLinks.thumbnail
+                    ? this.props.book.imageLinks.thumbnail
+                    : "no thumnail"
+                }")`
               }}
             ></div>
             <div className="book-shelf-changer">
