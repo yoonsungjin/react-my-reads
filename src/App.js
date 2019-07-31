@@ -21,6 +21,17 @@ class BooksApp extends React.Component {
     BooksAPI.getAll().then(books => this.setState({ books: books }));
   };
 
+  searchBooks(query) {
+    BooksAPI.search(query);
+  }
+
+  handleUpdateQuery(query) {
+    BooksAPI.search(query).then(books =>
+      books ? this.setState({ books }) : []
+    );
+    this.setState({ query });
+  }
+
   render() {
     {
       /*  <Router>
