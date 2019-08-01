@@ -21,6 +21,14 @@ class Search extends React.Component {
         ? this.setState({ filteredBooks: [] })
         : this.setState({ filteredBooks: books });
     });
+
+    this.state.filteredBooks.map(book => {
+      book.shelf = "none";
+      this.props.books.forEach(
+        bookOnShelf =>
+          book.id === bookOnShelf.id && (book.shelf = bookOnShelf.shelf)
+      );
+    });
   }
 
   render() {
@@ -45,20 +53,9 @@ class Search extends React.Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.filteredBooks.map(filteredBook => {
-              let shelf = "none";
-              this.props.books.map(book =>
-                book.id === filteredBook.id
-                  ? (filteredBook.shelf = book.shelf)
-                  : (filteredBook.shelf = shelf)
-              );
-              return (
-                <Book
-                  book={filteredBook}
-                  updateShelf={this.props.updateShelf}
-                />
-              );
-            })}
+            {this.state.filteredBooks.map(filteredBook => (
+              <Book book={filteredBook} updateShelf={this.props.updateShelf} />
+            ))}
           </ol>
         </div>
       </div>
