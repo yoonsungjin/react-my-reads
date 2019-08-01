@@ -24,7 +24,7 @@ class Search extends React.Component {
 
     this.state.filteredBooks.map(book => {
       book.shelf = "none";
-      this.props.books.forEach(
+      this.props.books.map(
         bookOnShelf =>
           book.id === bookOnShelf.id && (book.shelf = bookOnShelf.shelf)
       );
@@ -46,7 +46,6 @@ class Search extends React.Component {
             <input
               type="text"
               placeholder="Search by title or author"
-              value={this.state.query}
               onChange={event => this.updateQuery(event.target.value)}
             />
           </div>
@@ -54,7 +53,11 @@ class Search extends React.Component {
         <div className="search-books-results">
           <ol className="books-grid">
             {this.state.filteredBooks.map(filteredBook => (
-              <Book book={filteredBook} updateShelf={this.props.updateShelf} />
+              <Book
+                key={filteredBook.id}
+                book={filteredBook}
+                updateShelf={this.props.updateShelf}
+              />
             ))}
           </ol>
         </div>
