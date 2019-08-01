@@ -10,18 +10,21 @@ class Search extends React.Component {
 
   updateQuery = query => {
     this.setState({ query: query });
-    this.handleSearch(query);
+    if (query.length > 0) this.handleSearch(query);
+    else this.setState({ filteredBooks: [] });
   };
 
   handleSearch(query) {
     BooksAPI.search(query.trim(), 20).then(books => {
-      books
-        ? this.setState({ filteredBooks: books })
-        : this.setState({ filteredBooks: [] });
+      books.error
+        ? this.setState({ filteredBooks: [] })
+        : this.setState({ filteredBooks: books });
     });
   }
 
   render() {
+    console.log(this.state.filteredBooks);
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
