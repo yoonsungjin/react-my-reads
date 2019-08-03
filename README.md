@@ -1,6 +1,6 @@
 # MyReads 
 
-This is the book collection app. You can store books on shelf - Want to Read, Read, Currently Reading. 
+This is the book collection app that keep track of book history. You can seperate each book on one of shelf - Currently reading, Read and Want to Read. You can also search a book and move to the shelf where you want. Any status of book shelf will be stored in database using `BooksAPI` therefore when you refresh the page or come back later, you always see the same status of book shelf. 
 
 # Get Started
 ## Installation
