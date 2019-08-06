@@ -13,12 +13,11 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll().then(books => this.setState({ books: books }));
   }
-
   updateShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf);
-
-    //@TODO: proper way to refresh page after select shelf
-    BooksAPI.getAll().then(books => this.setState({ books: books }));
+    BooksAPI.update(book, shelf).then(() => {
+      //@TODO: proper way to refresh page after select shelf
+      BooksAPI.getAll().then(books => this.setState({ books: books }));
+    });
   };
 
   render() {

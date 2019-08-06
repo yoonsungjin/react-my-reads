@@ -2,6 +2,7 @@ import React from "react";
 import Book from "./Book";
 import * as BooksAPI from "./BooksAPI";
 import { Link } from "react-router-dom";
+import DebounceInput from "react-debounce-input";
 
 class Search extends React.Component {
   state = {
@@ -21,18 +22,18 @@ class Search extends React.Component {
         ? this.setState({ filteredBooks: [] })
         : this.setState({ filteredBooks: books });
     });
-
-    this.state.filteredBooks.map(book => {
-      book.shelf = "none";
-      this.props.books.map(
-        bookOnShelf =>
-          book.id === bookOnShelf.id && (book.shelf = bookOnShelf.shelf)
-      );
-    });
   }
 
   render() {
-    console.log(this.state.filteredBooks);
+    const newBooks = this.state.filteredBooks.map(book => {
+      const modifiedBook = { ...book };
+      modifiedBook.shelf = "none";
+      const isExists = this.props.books.find(b => b.id === modifiedBook.id);
+      if (isExists) {
+        modifiedBook.shelf = isExists.shelf;
+      }
+      return modifiedBook;
+    });
 
     return (
       <div className="search-books">
@@ -43,7 +44,8 @@ class Search extends React.Component {
 
           <div className="search-books-input-wrapper">
             {}
-            <input
+            <DebounceInput
+              debounceTimeout={1000}
               type="text"
               placeholder="Search by title or author"
               onChange={event => this.updateQuery(event.target.value)}
@@ -52,7 +54,7 @@ class Search extends React.Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.filteredBooks.map(filteredBook => (
+            {newBooks.map(filteredBook => (
               <Book
                 key={filteredBook.id}
                 book={filteredBook}
